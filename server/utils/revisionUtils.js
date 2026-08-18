@@ -1,26 +1,16 @@
 const intervals = [1, 3, 7, 14, 30];
 
 export const getToday = () => {
-  const parts = new Intl.DateTimeFormat("en-US", {
+  const today = new Intl.DateTimeFormat("en-CA", {
     timeZone: "Asia/Kolkata",
     year: "numeric",
     month: "2-digit",
     day: "2-digit",
-  }).formatToParts(new Date());
+  }).format(new Date());
 
-  const year = parts.find(
-    (part) => part.type === "year"
-  ).value;
+  console.log("INDIA TODAY:", today);
 
-  const month = parts.find(
-    (part) => part.type === "month"
-  ).value;
-
-  const day = parts.find(
-    (part) => part.type === "day"
-  ).value;
-
-  return `${year}-${month}-${day}`;
+  return today;
 };
 
 export const addDays = (dateString, days) => {
