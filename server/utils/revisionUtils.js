@@ -1,11 +1,24 @@
 const intervals = [1, 3, 7, 14, 30];
 
 export const getToday = () => {
-  const now = new Date();
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: "Asia/Kolkata",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).formatToParts(new Date());
 
-  const year = now.getFullYear();
-  const month = String(now.getMonth() + 1).padStart(2, "0");
-  const day = String(now.getDate()).padStart(2, "0");
+  const year = parts.find(
+    (part) => part.type === "year"
+  ).value;
+
+  const month = parts.find(
+    (part) => part.type === "month"
+  ).value;
+
+  const day = parts.find(
+    (part) => part.type === "day"
+  ).value;
 
   return `${year}-${month}-${day}`;
 };
